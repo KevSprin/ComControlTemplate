@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AE90F711-D39B-402C-ABCA-1D9887D89907}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ComControlTemplate</RootNamespace>
+    <AssemblyName>ComControlTemplate</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>true</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Signing.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>ComControlTemplate.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActiveXControlHelper.cs" />
+    <Compile Include="ComControlTemplate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ComControlTemplate.Designer.cs">
+      <DependentUpon>ComControlTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IExposedProperties.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ComControlTemplate.manifest" />
+    <None Include="Readme.md" />
+    <None Include="Signing.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ComControlTemplate.rc" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>@echo.
+set RCDIR=
+IF EXIST "$(FrameworkSDKDir)Bin\rc.exe" (set RCDIR="$(FrameworkSDKDir)Bin\rc.exe")
+IF EXIST "$(DevEnvDir)..\..\VC\Bin\rc.exe" (set RCDIR="$(DevEnvDir)..\..\VC\Bin\rc.exe")
+IF EXIST "$(DevEnvDir)..\..\SDK\v2.0\Bin\rc.exe" (set RCDIR="$(DevEnvDir)..\..\SDK\v2.0\Bin\rc.exe")
+IF EXIST "$(DevEnvDir)..\..\SDK\v3.5\Bin\rc.exe" (set RCDIR="$(DevEnvDir)..\..\SDK\v3.5\Bin\rc.exe")
+IF EXIST "$(DevEnvDir)..\..\..\Microsoft SDKs\Windows\v6.0a\bin\rc.exe" (set RCDIR="$(DevEnvDir)..\..\..\Microsoft SDKs\Windows\v6.0a\bin\rc.exe")
+IF EXIST "$(DevEnvDir)..\..\..\Microsoft SDKs\Windows\v7.0a\bin\rc.exe" (set RCDIR="$(DevEnvDir)..\..\..\Microsoft SDKs\Windows\v7.0a\bin\rc.exe")
+IF EXIST "C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x86\rc.exe" (set RCDIR="C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x86\rc.exe")
+if not defined RCDIR (echo "Warning!  Unable to find rc.exe, using default manifest instead.") ELSE (%25RCDIR%25 /r "$(ProjectDir)ComControlTemplate.rc")
+if not defined RCDIR (Exit 0)
+@echo.</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>echo register assembly
+echo $(frameworkdir)\$(frameworkversion)\regasm.exe "$(TargetPath)" /tlb /codebase</PostBuildEvent>
+  </PropertyGroup>
+</Project>

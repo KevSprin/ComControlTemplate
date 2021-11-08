@@ -1,0 +1,7 @@
+C:\Users\piikesp\Documents\ComControlTemplate\bin\Debug\ComControlTemplate.dll
+C:\Users\piikesp\Documents\ComControlTemplate\bin\Debug\ComControlTemplate.pdb
+C:\Users\piikesp\Documents\ComControlTemplate\bin\Debug\ComControlTemplate.tlb
+C:\Users\piikesp\Documents\ComControlTemplate\obj\Debug\ComControlTemplate.csproj.CoreCompileInputs.cache
+C:\Users\piikesp\Documents\ComControlTemplate\obj\Debug\ComControlTemplate.dll
+C:\Users\piikesp\Documents\ComControlTemplate\obj\Debug\ComControlTemplate.pdb
+C:\Users\piikesp\Documents\ComControlTemplate\obj\Debug\ComControlTemplate.csproj.AssemblyReference.cache
