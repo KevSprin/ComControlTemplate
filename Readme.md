@@ -1,4 +1,4 @@
-This Template presents a WindowsForms solution, that allows COM Interop Communication. The purpose of this project is to allow embedding of WindowsForms Control Libraries into VBA environments like Excel. It will allow to see COM exposed properties and Intellisense will be available as well. 
+This Template presents a WindowsForms solution, that allows COM Interop Communication. The purpose of this project is to allow embedding of WindowsForms Control Libraries into VBA environments like Excel. Custom properties that are exposed to COM will be visible inside the property window in VBA and Intellisense will show them as well
 To create an own project from scratch follow these steps:
 1. Create a new Windows Forms Control Library project
 2. Get into the properties of your project
@@ -17,7 +17,7 @@ To create an own project from scratch follow these steps:
 [Guid("<Generate a Guid somewhere and paste it in here>")]
 ```
 
-13. Add a property with an "DispId" annotation above:
+13. Add a property with a "DispId" annotation above:
 ```
 [DispId(1)]
 string CustomText { get; set; }
@@ -31,11 +31,11 @@ string CustomText { get; set; }
 [Guid("<Generate a Guid somewhere and paste it in here>"), ClassInterface(ClassInterfaceType.None)]
 ```
 
-For the next part I recommend to copy and paste the ActiveX Control registration functions
+For the next part I recommend to copy and paste the ActiveX Control registration functions.
 
 17. Copy the ActiveXControlHelper.cs into your project
 18. Add the ComRegisterFunction and ComUnregisterFunction to your Control Library class (copy and paste) with annotations
-19. Add to your project a manifest file. It should look like the file inside this template project, however you'll have to change the clsid and both the name of the assemblyIdentity and the name of the clrClass respective to your naming
+19. Add to your project a manifest file. It should look like the file inside this template project, however the clsid should be the same like the one you set in step 16. Also the name property inside "assemblyIdentity" should be the name of your project and the name property inside the "clrclass" tag should be the name of your project followed by a dot and then followed by the name of the control library class
 20. Add a new textfile and change its extension to .rc and insert the following into this file
 &nbsp;1 RT_MANIFEST <your manifest file>
 
