@@ -1,4 +1,4 @@
-## Register-Free COM Registration
+## COM Registration
 This Template presents a WindowsForms solution, that allows COM Interop Communication. The purpose of this project is to allow embedding WindowsForms Control Libraries into VBA environments like Excel. Custom properties that are exposed to COM will be visible inside the property window in VBA and Intellisense will show these properties them as well.
 To create an own project from scratch follow these steps:
 1. Create a new Windows Forms Control Library project
@@ -69,4 +69,3 @@ echo $(frameworkdir)\$(frameworkversion)\regasm.exe "$(TargetPath)" /tlb /codeba
 24. Build your project
 25. Done!
 
-The idea behind this approach allows us to expose assemblies to COM without the need to run `regasm.exe` manually. With a proper setup inside the project we can achieve a similar result.
